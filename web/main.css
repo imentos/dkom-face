@@ -1,0 +1,269 @@
+@font-face {
+    font-family: ben-light;
+    src: url('fonts/BentonSans-Light.ttf');
+}
+
+@font-face {
+    font-family: ben-medium;
+    src: url('fonts/BentonSans-Medium.ttf');
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #202020;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.top {
+    height: 70%;
+}
+
+.bottom {
+    height: 30%;
+}
+
+.container {
+    display: table;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-spacing: 2px;
+    padding: 0px !important;
+    border-spacing: 0px !important;
+}
+
+.toprow,
+.bottomrow {
+    height: 100%;
+    display: table-row;
+}
+
+.no-float {
+    float: none;
+}
+
+.livefeed {
+    display: table-cell;
+    background: gray;
+    margin: auto 0;
+    text-align: center;
+}
+
+.traffic {
+    display: table-cell;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-size: 100%;
+    border-right: solid 10px white;
+}
+
+.parking {
+    display: table-cell;
+    background: #202020;
+}
+
+h1 {
+    z-index: 2;
+    position: inherit;
+    color: white;
+    padding-left: 25px;
+    font-family: ben-medium;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 50px;
+    color: black;
+    font-family: ben-medium;
+    font-weight: bold;
+    padding-top: 50px;
+    z-index: 2;
+    position: inherit;
+}
+
+.logo {
+    z-index: 2;
+    position: absolute;
+    height: 15em;
+    top: 0px;
+    right: 0px;
+    padding: 20px;
+}
+
+.occupied {
+    text-align: center;
+    font-size: 175px;
+    color: #E20613;
+    font-family: ben-light;
+}
+
+.free {
+    text-align: center;
+    font-size: 175px;
+    color: #93C01F;
+    font-family: ben-light;
+}
+
+.info {
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    font-family: ben-light;
+}
+
+.adjust {
+    margin-top: -30px;
+}
+
+.percentage {
+    margin: auto;
+    padding-top: 50px;
+    width: 40%;
+    color: white;
+}
+
+.circles-text {
+    font-size: 30px;
+    font-family: ben-light;
+}
+
+.circles-number {
+    font-size: 60px;
+    font-family: ben-light;
+}
+
+.popover {
+    max-width: 100%;
+    /* Max Width of the popover (depending on the container!) */
+    /*background-color: #40AFCB;*/
+    background: url('images/Notification.png');
+    background-size: 100% 100%;
+    -webkit-box-shadow: none;
+    border: 0px;
+}
+
+.popover.top {
+    opacity: 0.7;
+}
+
+.popover-title {
+    color: blue;
+    font-size: 15px;
+}
+
+.popover-content {
+    /*background-color: #40AFCB;*/
+    font-size: 45px;
+    color: white;
+}
+
+.my-container {
+    margin: auto;
+    width: 500px;
+}
+
+.p-title {
+    margin: auto;
+    /*width: 750px;*/
+    text-align: center;
+    font-family: ben-medium;
+    font-size: 45px;
+}
+
+.p-blank {
+    padding: 25px;
+}
+
+.p-content {
+    margin: auto;
+    /*width: 750px;*/
+    text-align: center;
+    font-family: ben-light;
+    font-size: 45px;
+}
+
+.arrow {
+    /*border-width: 50px !important;*/
+    visibility: hidden;
+}
+
+a {
+    color: transparent;
+}
+
+.popover.top .arrow:after {
+    border-top-color: #40AFCB;
+}
+
+#trafficCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.webcam-live {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /*z-index: -100;*/
+    background-size: cover;
+    overflow: hidden;
+    /*-webkit-filter: grayscale(100%)*/
+}
+
+#carCanvas, #dogCanvas, #sheepCanvas, #cowCanvas, #birdCanvas, #personCanvas {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* debug for lower divs */
+    z-index: 1;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#toast-container > div {
+    width: 100% !important;
+}
+
+.toast-info {
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    border: 0px !important;
+}
+
+#toast-container > .toast-info {
+    background-size: 0 0 !important;
+
+}
+
+.parking-toastr {
+    left: 50%;
+    bottom: 30%;
+    width: 33%;
+    height: 40%;
+    background-image: url('images/Notification.png');
+    background-size: 100% 100%;
+    /*opacity: 0.7;*/
+}
+
+.traffic-toastr {
+    left: 10%;
+    bottom: 33%;
+    width: 33%;
+    height: 40%;
+    background-image: url('images/Notification.png');
+    background-size: 100% 100%;
+    /*opacity: 0.7;*/
+}
