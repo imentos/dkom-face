@@ -17,7 +17,7 @@
   node index.js
   ```
   
-2. Go to [http://localhost:3000/index.html](http://localhost:3000/index.html) in Chrome
+2. Go to [http://localhost:3000/index.html](http://localhost:3002/index.html) in Chrome
 
 ## Output Image Location:
 We capture images from webcam every second and save into this location for Karthik's algorithm. It is important to have the right location. Otherwise, car counting won't work.
