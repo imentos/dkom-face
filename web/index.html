@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Smart City & Traffic Control powered by Deep Learning</title>
+    <title>Face Recognition as Service</title>
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
-    <link href="bower_components/toastr/toastr.css" rel="stylesheet"/>
+    <link href="bower_components/toastr/toastr.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -24,89 +24,47 @@
     <div class="container top">
         <div class="row toprow">
             <div class="col-md-12 no-float livefeed">
-                <div class="title">SMART CITY POWERED BY DEEP LEARNING</div>                
+                <!-- <div class="title">Face Recognition as Service</div> -->
                 <img src="images/Logo.png" class="img-responsive logo">
-                <canvas id="carCanvas" width="1200px" height="900px">
-                </canvas>
-                <canvas id="dogCanvas" width="1200px" height="900px">
-                </canvas>                
-                <canvas id="sheepCanvas" width="1200px" height="900px">
-                </canvas>                
-                <canvas id="cowCanvas" width="1200px" height="900px">
-                </canvas>                
-                <canvas id="birdCanvas" width="1200px" height="900px">
-                </canvas>                
                 <canvas id="personCanvas" width="1200px" height="900px">
-                </canvas>                               
+                </canvas>
                 <webcam channel="myChannel" on-stream="onStream(stream)" on-streaming="onSuccess()" on-error="onError(err)"></webcam>
             </div>
         </div>
     </div>
-    <div class="container bottom">
-        <div class="row bottomrow">
-            <div id="traffic" class="col-md-6 no-float traffic">
-                <h1>TRAFFIC</h1>
-                <canvas id="trafficCanvas" width="1916" height="660">
-                </canvas>
-            </div>
-            <div id="parking" class="col-md-6 no-float parking">
-                <h1>PARKING</h1>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="free">{{free}}</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="occupied">{{total - free}}</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="percentage" id="ratioDiv"></div>
-                    </div>
-                </div>
-                <div class="row info-row">
-                    <div class="col-md-4">
-                        <div class="adjust info">Available</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="adjust info">Occupied</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="adjust info">Ratio</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/webcam/app/scripts/webcam.js"></script>
-        <script src="bower_components/toastr/toastr.js"></script>
-        <script src="app.js"></script>
-        <script src="circles.js"></script>
-        <script>
-        var video_constraints = {
-            mandatory: {
-                minHeight: 480,
-                minWidth: 640
-            },
-            optional: []
-        };
 
-        var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-        getUserMedia({
-                'audio': true,
-                'video': {
-                    "mandatory": {
-                        "minWidth": 1280,
-                        "minHeight": 720
-                    },
-                    "optional": []
-                }
-            },
-            function() {},
-            function() {});
-        </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/webcam/app/scripts/webcam.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="app.js"></script>
+    <script src="circles.js"></script>
+    <script>
+    var video_constraints = {
+        mandatory: {
+            minHeight: 480,
+            minWidth: 640
+        },
+        optional: []
+    };
+
+    var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    getUserMedia({
+            'audio': true,
+            'video': {
+                "mandatory": {
+                    "minWidth": 1280,
+                    "minHeight": 720
+                },
+                "optional": []
+            }
+        },
+        function() {},
+        function() {});
+    </script>
 </body>
 
 </html>

@@ -13,15 +13,11 @@ angular.module('mainApp', ["webcam"])
         var socket = io();
         var _video = null;
 
-        $scope.free = 6;
-        $scope.curFree = 6;
-        $scope.total = 6;
-
         $scope.canvases = {};
         $scope.contexes = {};
 
-        $scope.canvases["person"] = $("#cowCanvas")[0];
-        $scope.contexes["person"] = $("#cowCanvas")[0].getContext("2d");
+        $scope.canvases["person"] = $("#personCanvas")[0];
+        $scope.contexes["person"] = $("#personCanvas")[0].getContext("2d");
         $scope.contexes["person"].strokeStyle = "#FF0000";
 
         // video
