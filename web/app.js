@@ -20,26 +20,6 @@ angular.module('mainApp', ["webcam"])
         $scope.canvases = {};
         $scope.contexes = {};
 
-        $scope.canvases["car"] = $("#carCanvas")[0];
-        $scope.contexes["car"] = $("#carCanvas")[0].getContext("2d");
-        $scope.contexes["car"].strokeStyle = "#FF0000";
-
-        $scope.canvases["dog"] = $("#cowCanvas")[0];
-        $scope.contexes["dog"] = $("#cowCanvas")[0].getContext("2d");
-        $scope.contexes["dog"].strokeStyle = "#FF0000";
-
-        $scope.canvases["sheep"] = $("#carCanvas")[0];
-        $scope.contexes["sheep"] = $("#carCanvas")[0].getContext("2d");
-        $scope.contexes["sheep"].strokeStyle = "#FF0000";
-
-        $scope.canvases["cow"] = $("#cowCanvas")[0];
-        $scope.contexes["cow"] = $("#cowCanvas")[0].getContext("2d");
-        $scope.contexes["cow"].strokeStyle = "#FF0000";
-
-        $scope.canvases["bird"] = $("#carCanvas")[0];
-        $scope.contexes["bird"] = $("#carCanvas")[0].getContext("2d");
-        $scope.contexes["bird"].strokeStyle = "#FF0000";
-
         $scope.canvases["person"] = $("#cowCanvas")[0];
         $scope.contexes["person"] = $("#cowCanvas")[0].getContext("2d");
         $scope.contexes["person"].strokeStyle = "#FF0000";
@@ -111,193 +91,15 @@ angular.module('mainApp', ["webcam"])
 
                 $scope.contexes[type].font = "15pt ben-light";
                 $scope.contexes[type].fillStyle = "red";
-                $scope.contexes[type].fillText(type, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
+                $scope.contexes[type].fillText(bbox.name, 1200.0 * (bbox.x / 320), 900.0 * (bbox.y / 240) - 10);
             }
         }
-
-        $scope.updateRatio = function() {
-            var occupied = $scope.total - $scope.free;
-            var percentage = 100 * (occupied / $scope.total);
-            var percentageString = parseFloat(percentage.toString()).toFixed(0)
-            Circles.create({
-                id: 'ratioDiv',
-                percentage: Math.floor(percentage),
-                radius: 80,
-                width: 10,
-                //number: percentage,
-                text: '%',
-                colors: ['#888', '#F00']
-            });
-        }
-
-        $scope.updateTraffic = function(carCount) {
-            if ($scope.carCount == 4 && carCount == 5) {
-                toastr.clear();
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": false,
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    // "showMethod": "fadeIn",
-                    // "hideMethod": "fadeOut",
-                    "showMethod": "slideDown",
-                    "hideMethod": "slideUp",
-                    "positionClass": "traffic-toastr"
-                };
-                toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Traffic density on Main Street at 90%</div><div class='p-blank'></div>" + "<div class='p-title'>Suggestion:</div><div class='p-content'>Send routing update to avoid area</div>")
-            }
-            $scope.carCount = carCount;
-
-            var canvas = document.getElementById("trafficCanvas");
-            var ctx = canvas.getContext("2d");
-
-            var mapImage = new Image();
-            mapImage.onload = function() {
-                ctx.drawImage(mapImage, 0, 0, 1916, 660);
-
-                var pathImage = new Image();
-                pathImage.onload = function() {
-                    ctx.drawImage(pathImage, 450, 0, 666, 468);
-                };
-                if (carCount < 3) {
-                    pathImage.src = 'images/Path_Green.png';
-                } else if (carCount >= 3 && carCount < 5) {
-                    pathImage.src = 'images/Path_Yellow.png';
-                } else if (carCount >= 5) {
-                    pathImage.src = 'images/Path_Red.png';
-                }
-            };
-            mapImage.src = 'images/Map.png';
-        }
-
-        $scope.updateRatio();
-
-        $scope.updateTraffic(0);
-
-
-        //////////////////////////////////////////////////////
-        // socket.io
-        for (var i = 1; i <= 6; i++) {
-            (function(index) {
-                socket.on('lot' + index, function(msg) {
-                    console.log('lot' + index + ": " + msg.status);
-                    if (msg.status) {
-                        if (msg.status == "free") {
-                            $scope.free++;
-                        } else {
-                            $scope.free--;
-                        }
-
-                        if ($scope.free < 0) {
-                            $scope.free++;
-                            //alert("Cannot be less than zero")
-                            return;
-                        }
-
-                        if ($scope.free > $scope.total) {
-                            $scope.free--;
-                            //alert("Only two parking lots")
-                            return;
-                        }
-
-                        if ($scope.free == 2 && $scope.curFree == 3) {
-                            toastr.clear();
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": true,
-                                "progressBar": false,
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "3000",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                // "showMethod": "fadeIn",
-                                // "hideMethod": "fadeOut",
-                                "showMethod": "slideDown",
-                                "hideMethod": "slideUp",
-                                "positionClass": "parking-toastr"
-                            };
-                            toastr.info("<div class='p-blank'></div><div class='p-title'>Alert:</div><div class='p-content'>Parking lot on Main Street 66% occupied</div><div class='p-blank'></div>" +
-                                "<div class='p-title'>Suggestion:</div><div class='p-content'>Open overflow parking on Unity Street</div>")
-                        }
-
-                        $scope.curFree = $scope.free
-                        $scope.updateRatio();
-                    }
-                });
-            })(i);
-        }
-
-
-        socket.on('car', function(msg) {
-            $scope.$apply(function() {
-                console.log(msg);
-
-                $scope.updateBoundingBox('car', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
-        });
-
-        socket.on('dog', function(msg) {
-            $scope.$apply(function() {
-                console.log(msg);
-
-                $scope.updateBoundingBox('dog', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
-        });
-
-        socket.on('sheep', function(msg) {
-            $scope.$apply(function() {
-                console.log(msg);
-
-                $scope.updateBoundingBox('sheep', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
-        });
-
-        socket.on('cow', function(msg) {
-            $scope.$apply(function() {
-                console.log(msg);
-
-                $scope.updateBoundingBox('cow', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
-        });
-
-        socket.on('bird', function(msg) {
-            $scope.$apply(function() {
-                console.log(msg);
-
-                $scope.updateBoundingBox('bird', msg);
-
-                $scope.updateTraffic(msg.length);
-            });
-        });
 
         socket.on('person', function(msg) {
             $scope.$apply(function() {
                 console.log(msg);
 
                 $scope.updateBoundingBox('person', msg);
-
-                $scope.updateTraffic(msg.length);
             });
         });
     });
